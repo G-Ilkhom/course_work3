@@ -23,3 +23,8 @@ class transaction:
         payment_method = payment_method[:7] + '** **** ' + payment_method[-5:]
         recipients = '**' + to_[1][-4:]
         return f'{" ".join(payer_info[:-1])} {payment_method} -> {to_[0]} {recipients}'
+
+    def get_operation_amount(self, number):
+        amount = self.data[number]['operationAmount']["amount"]
+        currency = self.data[number]['operationAmount']["currency"]["name"]
+        return f'{amount} {currency}'
