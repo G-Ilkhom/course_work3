@@ -1,11 +1,6 @@
-import json
-import os
-from config import ROOT_DIR
-from src.utils import get_all_operations, get_formatted_operation
+from config import OPERATIONS_PATH
+from utils import transaction
 
-OPERATIONS_PATH = os.path.join(ROOT_DIR, 'src/operations.json')
-all_operations = get_all_operations(OPERATIONS_PATH)
-all_operations = [operations for operations in all_operations if operations != {}]
-filtered_operations = list(filter(lambda operation: operation["state"] == "EXECUTED", all_operations))
-sorted_operations = sorted(filtered_operations[:5], key=lambda operation: operation['date'], reverse=True)
-print(f"{'\n\n'.join(get_formatted_operation(sorted_operations))}")
+for operation in range(5):
+    transfer = transaction(OPERATIONS_PATH)
+    print(transfer.results(operation))
