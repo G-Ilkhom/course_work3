@@ -12,3 +12,14 @@ class transaction:
         date = date.split('T')[0]
         date = '.'.join(date.split('-')[::-1])
         return f'{date} {description}'
+
+    def get_payment_transfer(self, number):
+        payer_info = self.data[number]['from'].split()
+        to_ = self.data[number]['to'].split()
+        payment_method_from = payer_info[-1]
+        payment_method = ''
+        for i in range(0, len(payment_method_from), 4):
+            payment_method += payment_method_from[i:i + 4] + ' '
+        payment_method = payment_method[:7] + '** **** ' + payment_method[-5:]
+        recipients = '**' + to_[1][-4:]
+        return f'{" ".join(payer_info[:-1])} {payment_method} -> {to_[0]} {recipients}'
