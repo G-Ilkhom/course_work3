@@ -28,3 +28,6 @@ class transaction:
         amount = self.data[number]['operationAmount']["amount"]
         currency = self.data[number]['operationAmount']["currency"]["name"]
         return f'{amount} {currency}'
+
+    def results(self, operation):
+        return f'{self.get_date_and_description(operation)}\n{self.get_payment_transfer(operation)}\n{self.get_operation_amount(operation)}\n'
